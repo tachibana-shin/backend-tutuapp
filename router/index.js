@@ -8,6 +8,7 @@ import Error404 from "../pages/404.vue"
 import Login from "../pages/Login.vue"
 import Logout from "../pages/Logout.vue"
 import MyAccount from "../pages/MyAccount.vue"
+import Banners from "../pages/Banners.vue"
 
 Vue.use(VueRouter)
 
@@ -39,6 +40,13 @@ const routes = [
       component: iCloud,
       meta: {
          title: "iCloud Manager - FreeiOS"
+      }
+   },
+   {
+      path: "/banners",
+      component: Banners,
+      meta: {
+         title: "Banners Manager"
       }
    },
    {

@@ -119,7 +119,6 @@
 </template>
 <script>
    import axios from "axios"
-   import EasyMDE from "easymde"
    import Swal from "sweetalert2"
    import VueSelect from "vue-select"
    import ImageInput from "./../components/ImageInput.vue"
@@ -340,7 +339,6 @@
    }
 </script>
 <style lang="scss" scoped>
-   @import "https://unpkg.com/easymde/dist/easymde.min.css";
    @import "https://unpkg.com/vue-select@3.0.0/dist/vue-select.css";
 
    .main {

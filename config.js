@@ -10,21 +10,21 @@ SystemJS.config({
     },
   },
   map: {
-        'plugin-babel': 'systemjs-plugin-babel@latest/plugin-babel.js',
-    'systemjs-babel-build': 'systemjs-plugin-babel@latest/systemjs-babel-browser.js',
+        'plugin-babel': './plugin-babel.js',
+        'systemjs-babel-build': './systemjs-babel-browser.js',
         
-        'vue-loader': 'systemjs-vue-loader@latest',
+        'vue-loader': './systemjs-vue-loader.js',
         'vue-template-compiler': 'vue-template-compiler@latest',
         'vue-template-es2015-compiler': 'vue-template-es2015-compiler@latest',
-        'sass.js': 'sass.js@latest',
+        'sass.js': './sass.sync.js',
         'less': 'less@latest',
         'acorn': 'acorn@latest',
-        'bootstrap-vue': 'bootstrap-vue',
+        'bootstrap-vue': './bootstrap-vue.common.js',
         'vue-infinite-loading': 'vue-infinite-loading',
         'vue-router': 'vue-router',
         'axios': 'https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js',
         'vue-unsaved-changes-dialog': 'vue-unsaved-changes-dialog',
-        'sweetalert2': 'sweetalert2',
+        'sweetalert2': './sweetalert2.all.js',
         'vue-sweetalert2': 'vue-sweetalert2',
         'vue-float-action-button': 'vue-float-action-button',
         'vue-loading-overlay': 'vue-loading-overlay',
@@ -39,13 +39,10 @@ SystemJS.config({
   },
   packages: {
         vue: {
-            main: 'dist/vue.js'
+            main: './vue.js'
         },
         'vue-template-es2015-compiler': {
             main: 'index.js'
-        },
-        easymde: {
-           main: 'dist/easymde.min.js'
         }
     }
 });

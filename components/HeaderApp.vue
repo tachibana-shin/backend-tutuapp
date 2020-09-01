@@ -24,11 +24,7 @@
             <b-nav-item to="/" active-class="" exact-active-class="active"> App Manager </b-nav-item>
             <b-nav-item to="/upload"> Upload App </b-nav-item>
             <b-nav-item to="/icloud"> iCloud Manager </b-nav-item>
-            <b-nav-item-dropdown text="Bộ mã markdown">
-               <b-dropdown-item to="/md-tutorial"> Hướng dẫn </b-dropdown-item>
-               <b-dropdown-item to="/md-rules"> Nội quy </b-dropdown-item>
-               <b-dropdown-item to="/md-faqs"> FAQs </b-dropdown-item>
-            </b-nav-item-dropdown>
+            <b-nav-item to="/banners"> Banners Manager </b-nav-item>
          </b-navbar-nav>
       </b-collapse>
    </b-navbar>
