@@ -10,26 +10,27 @@ SystemJS.config({
     },
   },
   map: {
-        'plugin-babel': './plugin-babel.js',
-        'systemjs-babel-build': './systemjs-babel-browser.js',
+        'plugin-babel': './js/systemjs-plugin-babel/plugin-babel.js',
+         'systemjs-babel-build': './js/systemjs-plugin-babel/systemjs-babel-browser.js',
         
-        'vue-loader': './systemjs-vue-loader.js',
+        'vue-loader': './js/systemjs-vue-loader.js',
         'vue-template-compiler': 'vue-template-compiler@latest',
         'vue-template-es2015-compiler': 'vue-template-es2015-compiler@latest',
-        'sass.js': './sass.sync.js',
+        'sass.js': './js/sass.sync.js',
         'less': 'less@latest',
         'acorn': 'acorn@latest',
-        'bootstrap-vue': './bootstrap-vue.common.js',
+        'bootstrap-vue': './js/bootstrap-vue.common.js',
         'vue-infinite-loading': 'vue-infinite-loading',
         'vue-router': 'vue-router',
         'axios': 'https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js',
         'vue-unsaved-changes-dialog': 'vue-unsaved-changes-dialog',
-        'sweetalert2': './sweetalert2.all.js',
+        'sweetalert2': './js/sweetalert2.all.js',
         'vue-sweetalert2': 'vue-sweetalert2',
         'vue-float-action-button': 'vue-float-action-button',
         'vue-loading-overlay': 'vue-loading-overlay',
         'animejs': 'animejs',
-        'vue-progressbar': 'vue-progressbar'
+        'vue-progressbar': 'vue-progressbar',
+        "vue": "./js/vue.js"
   },
   transpiler: 'plugin-babel',
   separateCSS: false,
@@ -38,9 +39,9 @@ SystemJS.config({
      "autoprefixer": true
   },
   packages: {
-        vue: {
-            main: './vue.js'
-        },
+        /*vue: {
+            main: 'vue.js'
+        },*/
         'vue-template-es2015-compiler': {
             main: 'index.js'
         }
