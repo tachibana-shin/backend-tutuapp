@@ -2,20 +2,24 @@ import Vue from "vue"
 import VueRouter from "vue-router"
 
 import Editor from "../pages/Editor.vue"
-import AppManager from "../pages/AppManager.vue"
-import iCloud from "../pages/iCloudManager.vue"
+import App from "../pages/App.vue"
+import iCloud from "../pages/iCloud.vue"
 import Error404 from "../pages/404.vue"
 import Login from "../pages/Login.vue"
 import Logout from "../pages/Logout.vue"
 import MyAccount from "../pages/MyAccount.vue"
 import Banners from "../pages/Banners.vue"
 
+import ChangeName from "../pages/ChangeName.vue"
+import ChangeEmail from "../pages/ChangeEmail.vue"
+import ChangePassword from "../pages/ChangePassword.vue"
+
 Vue.use(VueRouter)
 
 const routes = [
    {
       path: "/",
-      component: AppManager,
+      component: App,
       meta: {
          title: "Admin App Manager - FreeiOS"
       }
@@ -62,6 +66,18 @@ const routes = [
       meta: {
          title: "My Account Admin - FreeiOS"
       }
+   },
+   {
+      path: "/myaccount/change/name",
+      component: ChangeName
+   },
+   {
+      path: "/myaccount/change/email",
+      component: ChangeEmail
+   },
+   {
+      path: "/myaccount/change/password",
+      component: ChangePassword
    },
    {
       path: "/logout",

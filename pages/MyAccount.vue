@@ -11,49 +11,104 @@
          </form>
       </div>
       <div class="privacy" v-if="renderPage">
-         <!--<h1 class="title"> Quản lý tài khoản </h1>-->
+         <h2 class="title"> Thông tin cá nhân </h2>
          <div class="content">
-            <div class="form-group">
-               <label> Email </label>
-               <input type="email" placeholder="Example: example@example.com" class="form-control">
-               <b-button @click="saveEmail"> Save </b-button>
+            
+            <div class="item">
+               
+               <h4 class="general"> Chung </h4>
+               
+               <ul class="content">
+                  <li is="router-link" tag="li" to="/myaccount/change/name" class="item">
+                     <h5 class="title-item"> Tên </h5>
+                     <p class="content"> Nguyễn Thành </p>
+                  </li>
+                  <li is="router-link" tag="li" to="/myaccount/change/email" class="item">
+                     <h5 class="title-item"> Email </h5>
+                     <p class="content"> thanhnguyennguyen1995@gmail.com </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="item">
+               
+               <h4 class="general"> Bảo mật </h4>
+               
+               <ul class="content">
+                  <li is="router-link" tag="li" to="/myaccount/change/password" class="item">
+                     <h5 class="title-item"> Đổi mật khẩu </h5>
+                  </li>
+               </ul>
             </div>
             
-            <form ref="FormDataChangePassword" class="form-group">
-               <label> Change Password </label>
-               <div class="group-password">
-                  <input type="password" class="form-control" name="newPassword" placeholder="New Password">
-               </div>
-               <b-button @click="savePassword"> Save </b-button>
-            </form>
          </div>
       </div>
    </div>
 </template>
 <style lang="scss" scoped>
    .main {
+      @for $i from 1 to 7 {
+         h#{$i} {
+            margin: 0;
+            padding: 0;
+            font-weight: 500;
+         }
+      }
       padding: {
          left: 15px;
          right: 15px;
-         top: 40px;
-         bottom: 40px;
       }
 
 
       .content {
          .form-group {
-            .group-password {
-               position: relative;
-               &>.eye {
-                  position: absolute;
-                  z-index: 2;
-                  right: 1.2rem;
-                  top: 0;
-                  bottom: 0;
-                  margin: auto 0 auto 0;
+            margin-top: 1.5rem;
+         }
+      }
+      .privacy {
+         .title {
+            
+         }
+         .content {
+            .item {
+                     
+               .general {
+                  margin-top: 1.5rem;
+               }
+               .content {
+                  list-style: none;
+                  margin: 0;
+                  padding: 0;
+                  margin-top: .3rem;
+                  .item {
+                     position: relative;
+                     padding: .5rem;
+                     border-bottom: 1px solid rgba(0, 0, 0, .1);
+                     display: flex;
+                     justify-content: space-between;
+                     flex-direction: column;
+                     padding-right: 1rem;
+                     .title-item {
+                        font-size: 1rem !important;
+                     }
+                     .content {
+                        color: var(--secondary);
+                        font-size: 14px;
+                     }
+                     &:before {
+                        content: "";
+                        position: absolute;
+                        top: 50%;
+                        right: .3rem;
+                        right: .5rem;
+                        border: solid black;
+                        border-width: 0 3px 3px 0;
+                        display: inline-block;
+                        padding: 3px;
+                        transform: rotate(-45deg) translateY(-50%);
+                     }
+                  }
                }
             }
-            margin-top: 1.5rem;
          }
       }
    }
@@ -62,38 +117,22 @@
    export default {
       data() {
          return {
-            renderPage: false
+            renderPage: true
          }
       },
       methods: {
          confirmPassword() {
             this.$axios.post("http://localhost:8001/admin/api/confirm-password.php", new FormData(this.$refs.FormDataConfirmPassword))
-            .then(res => { if ( typeof res.data == "object" ) return res.data; try { return JSON.parse(res.data) } catch(e) { return { error: 1, mess: res.data } } })
+            .then(res => res.data)
             .then(json => {
-               if ( json.error == 1 ) {
-                  throw new Error(json.mess)
+               if ( json.state.error ) {
+                  throw new Error(json.state.message)
+               } else {
+                  this.renderPage = true
                }
-               this.renderPage = true
             })
             .catch(({ stack, message }) => {
-               this.$AppError(message, stack)
-            })
-         },
-         saveEmail() {
-            
-         },
-         savePassword() {
-            this.$axios.post("http://localhost:8001/admin/api/change-password.php", new FormData(this.$refs.FormDataChangePassword))
-            .then(res => { if ( typeof res.data == "object" ) return res.data; try { return JSON.parse(res.data) } catch(e) { return { error: 1, mess: res.data } } })
-            .then(json => {
-               if ( json.error == 1 ) {
-                  throw new Error(json.mess)
-               }
-               
-               this.$AppSuccess("Success", "Change password done.")
-            })
-            .catch(({ message, stack }) => {
-               this.$AppError(message, stack)
+               this.$error(message, stack)
             })
          }
       }

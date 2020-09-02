@@ -2,25 +2,28 @@
    <div class="main">
       <div class="logout">
          <div class="header">
-            <img class="avatar" src="https://nguyenthanh1995.github.io/favicon.ico"/>
+            <img class="avatar" :src="$store.state.currentUser.photoURL">
+            <h5 class="name"> {{ $store.state.displayName }} </h5>
          </div>
          <div class="loading">
-            <b-spinner type="border"/> Logout...
+            <b-spinner type="border" /> Logout...
          </div>
       </div>
    </div>
 </template>
-
 <style lang="scss" scoped>
    .main {
       padding: {
          top: 40px;
          bottom: 40px;
-      };
+      }
+
+      ;
       display: flex;
       justify-content: center;
       align-items: center;
       text-align: center;
+
       .logout {
          .header {
             .avatar {
@@ -29,7 +32,12 @@
                border: 1px solid rgba(0, 0, 0, .1);
                border-radius: 50%;
             }
+
+            .name {
+               font-weight: 500;
+            }
          }
+
          .loading {
             display: flex;
             justify-content: center;
@@ -40,23 +48,21 @@
       }
    }
 </style>
-
 <script>
    export default {
       created() {
-        this.$axios.post("http://localhost:8001/admin/api/logout.php")
-         .then(res => { if ( typeof res.data == "object" ) return res.data; try { return JSON.parse(res.data) } catch(e) { return { error: 1, mess: res.data } } })
-         .then(json => {
-            if ( json.error == 1 ) {
-               throw new Error(json.mess)
-            }
-            this.$AppSuccess("Success", "Logout!")
-            this.$router.push("/login")
-            this.$store.commit("emptyAccount")
-         })
-         .catch(({ message, stack }) => {
-            this.$AppError(message, stack)
-         })
+         this.$store.dispatch("Logout")
+            .then(json => {
+               if (json.state.error) {
+                  throw new Error(json.state.message)
+               } else {
+                  this.$success("Success", "Logout!")
+                  this.$router.push("/login")
+               }
+            })
+            .catch(({ message, stack }) => {
+               this.$error(message, stack)
+            })
       }
    }
 </script>

@@ -73,7 +73,7 @@
          return !empty($_POST[$key] ?? null);
       }
       
-      public function read() {
+      private function read() {
          global $SQL;
          $id = $_GET["id"] ?? null;
          
@@ -169,7 +169,7 @@
          }
          return $versions;
       }
-      public function write() {
+      private function write() {
          global $SQL;
          
          if (
@@ -219,7 +219,7 @@
             echo json_encode(ErrorMS::PARAMS);
          }
       }
-      public function update() {
+      private function update() {
          global $SQL;
          
          $id = $_POST["id"] ?? null;
@@ -318,7 +318,7 @@
             echo json_encode(ErrorMS::PARAMS);
          } 
       }
-      public function remove() {
+      private function remove() {
          global $SQL;
          
          $id = $_POST["id"] ?? null;

@@ -21,10 +21,18 @@
       </b-navbar-brand>
       <b-collapse :id="id" is-nav>
          <b-navbar-nav>
-            <b-nav-item to="/" active-class="" exact-active-class="active"> App Manager </b-nav-item>
-            <b-nav-item to="/upload"> Upload App </b-nav-item>
-            <b-nav-item to="/icloud"> iCloud Manager </b-nav-item>
-            <b-nav-item to="/banners"> Banners Manager </b-nav-item>
+            <b-nav-item to="/" active-class="" exact-active-class="active">
+               <i class="fab fa-app-store"></i>
+               App Manager </b-nav-item>
+            <b-nav-item to="/upload">
+               <i class="far fa-arrow-alt-circle-up"></i>
+               Upload App </b-nav-item>
+            <b-nav-item to="/icloud">
+               <i class="fab fa-cloudversify"></i>
+               iCloud Manager </b-nav-item>
+            <b-nav-item to="/banners">
+               <i class="far fa-pennant"></i>
+               Banners Manager </b-nav-item>
          </b-navbar-nav>
       </b-collapse>
    </b-navbar>
@@ -36,9 +44,9 @@
       box-shadow: none !important;
    }
 
-   .collapsw {
+   .collapse {
       .navbar-nav {
-         margin-left: 2.5rem !important
+         margin-left: 1rem !important
       }
    }
 

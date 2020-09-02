@@ -15,10 +15,7 @@ export default new Vuex.Store({
       }
    },
    actions: {
-      Login({ commit }, { username, password }) {
-         let form = new FormData
-         form.append("username", username)
-         form.append("password", password)
+      Login({ commit }, form) {
          return this.$axios.post("https://localhost:8080/admin/api/Login.php", form)
          .then(res => res.data)
          .then(json => {

@@ -5,9 +5,8 @@
          }" @submit.prevent="login">
          <img class="mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
          <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-         <input type="text" name="username" class="form-control" placeholder="Email address" required autofocus>
+         <input type="email" name="email" class="form-control" placeholder="Email address" required>
          <input type="password" name="password" class="form-control" placeholder="Password" required>
-         
          <button class="btn btn-lg btn-primary btn-block mt-3" type="submit">Sign in</button>
          <p class="mt-5 mb-3 text-muted">&copy; 2020</p>
       </form>
@@ -67,7 +66,6 @@
    }
 </style>
 <script>
-   import axios from "axios"
    export default {
       data() {
          return {
@@ -84,47 +82,28 @@
                   container: null
                })
 
-               this.$axios.post("http://localhost:8001/admin/api/login.php", new FormData(target))
-                  .then(res => { if (typeof res.data == "object") return res.data; try { return JSON.parse(res.data) } catch (e) { return { error: 1, mess: res.data } } })
+               this.$store.dispatch("Login", new FormData(target))
                   .then(json => {
-                     
-                     if (json.error == 1) {
-                        throw new Error(json.mess)
+                     if (this.$route.params.url) {
+                        this.$router.push(this.$route.params.url)
+                     } else {
+                        this.$router.push("/")
                      }
-
-                     this.$AppSuccess("Success", "Login success.")
-                     this.$store.dispatch("currentUser")
-                        .then(json => {
-                           setTimeout(() => {
-                              if (this.$route.params.url) {
-                                 this.$router.push(this.$route.params.url)
-                              } else {
-                                 this.$router.push("/")
-                              }
-                           })
-                        })
                   })
                   .catch(({ stack, message }) => {
-                     
-                     this.$AppError(message, stack)
+                     this.$error(message, stack)
                      this.wasValid = true
                   })
                   .finally(() => loading.hide())
             } else {
                this.wasValid = true
             }
-         },
-         checkLogined() {
-            this.$store.dispatch("currentUser")
-               .then(json => {
-                  if (json.logined) {
-                     this.$router.replace("/")
-                  }
-               })
          }
       },
       created() {
-         this.checkLogined()
+         if ( this.$store.state.currentUser ) {
+            this.$router.$push("/")
+         }
       }
    }
 </script>
