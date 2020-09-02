@@ -16,7 +16,7 @@
       private function checkPassword() {
          global $SQL;
          if ( !empty($_POST["password"] ?? null) ) {
-            $email = OAuth::getCurrentUser()["email"];
+            $email = OAuth::getToken() -> email;
             $password = md5($_POST["password"]);
             echo json_encode([
                "state" => [

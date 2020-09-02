@@ -4,7 +4,7 @@
          <form ref="FormDataConfirmPassword" class="form-group">
             <label> Enter Password </label>
             <div class="group-password">
-               <input type="password" name="password" class="form-control" placeholder="Password">
+               <input type="password" name="password-confirm" class="form-control" placeholder="Password">
             </div>
             <b-button variant="primary" block @click="confirmPassword" class="mt-3"> Continue </b-button>
             <small class="text-secondary"> Để tiếp tục bạn cần nhập mật khẩu. </small>
@@ -117,7 +117,7 @@
    export default {
       data() {
          return {
-            renderPage: true
+            renderPage: false
          }
       },
       methods: {
@@ -128,7 +128,10 @@
                if ( json.state.error ) {
                   throw new Error(json.state.message)
                } else {
-                  this.renderPage = true
+                  this.renderPage = json.data
+                  if ( !json.data ) {
+                     this.$error("Confirm failed", "Wrong cofirm password")
+                  }
                }
             })
             .catch(({ stack, message }) => {

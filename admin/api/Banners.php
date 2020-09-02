@@ -127,7 +127,7 @@
             $index = count($post["banners-map"]);
             
             /* delete item */
-            $result = $SQL -> query("select id, path from Banners order by id asc limit 99999999 offset $index");
+            $result = $SQL -> query("select id, path from Banners where category = '".addslashes($_POST["category"])."' order by id asc limit 99999999 offset $index");
             
             while ( $row = $result -> fetch_array() ) {
                File::remove($row["path"]);
@@ -135,7 +135,6 @@
             }
             
             $result -> free_result();
-            
             if ( $SQL -> error ) {
                echo json_encode(ErrorMS::UNKNOWN);
             } else {

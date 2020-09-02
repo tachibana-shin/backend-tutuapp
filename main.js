@@ -15,7 +15,7 @@ Vue.use(VueLoadingOverlay)
 Vue.use(VueProgressBar, {
    color: 'rgb(143, 255, 199)',
    failedColor: "#f00",
-   height: '3px'
+   height: '5px'
 })
 Vue.use(VueNotification)
 
