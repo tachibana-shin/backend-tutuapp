@@ -31,10 +31,10 @@
          return !empty($_POST[$key] ?? null);
       }
       private function Login() {
-         if ( $this -> checkValid("username") && $this -> checkValid("password") ) {
+         if ( $this -> checkValid("email") && $this -> checkValid("password") ) {
             if ( OAuth::authorized() ) {
                echo json_encode(ErrorMS::LOGGED);
-            } else if ( $user = OAuth::Login($_POST["username"], $_POST["password"]) ) {
+            } else if ( $user = OAuth::Login($_POST["email"], $_POST["password"]) ) {
                echo json_encode([
                   "state" => [
                      "error" => false,

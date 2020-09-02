@@ -9,6 +9,7 @@
             <template v-slot:button-content>
                <i class="fas fa-user" style="font-size: 1.5rem"></i>
             </template>
+            <h5 class="name"> {{ $store.state.currentUser.displayName }} </h5>
             <span class="dropdown-item font-bold"> {{ $store.state.currentUser.user }} </span>
             <router-link to="/myaccount" class="dropdown-item mt-1">
                Manager Account
@@ -62,6 +63,10 @@
       &::after {
          display: none !important;
       }
+   }
+   
+   .name {
+      font-weight: 500;
    }
 </style>
 <script>

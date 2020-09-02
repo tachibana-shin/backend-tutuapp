@@ -1,12 +1,12 @@
 <template>
-   <div class="main">
+   <div class="main" v-if="$store.state.currentUser">
       <div class="logout">
          <div class="header">
             <img class="avatar" :src="$store.state.currentUser.photoURL">
             <h5 class="name"> {{ $store.state.displayName }} </h5>
          </div>
-         <div class="loading">
-            <b-spinner type="border" /> Logout...
+         <div class="loading mt-3">
+            <b-spinner type="border" class="mr-3"/> Logout...
          </div>
       </div>
    </div>

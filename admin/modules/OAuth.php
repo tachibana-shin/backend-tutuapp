@@ -1,22 +1,16 @@
 <?php
    require_once __DIR__."/JWT.php";
    require_once __DIR__."/SQL.php";
+   require_once __DIR__."/Method.php";
    
    use \Firebase\JWT\JWT;
    
    class OAuth {
       const KEY_JWT = "MY_KEY_JWT";
       
-      const TABLE_AUTHORLIZER = "TABLE_AUTHORLIZER";
+      const TABLE_AUTHORLIZER = "AdminAccount";
       
       static public function getToken() {
-         return $_user = (object) [
-            "email" => "thanhnguyennguyen1995@gmail.com",
-            "name" => "Nguyen Thanh",
-            "photoURL" => "",
-            "password" => "",
-            "id" => 1
-         ];
          $token = $_COOKIE["authorlize_token"] ?? null;
             
          return $token == null ? null : JWT::decode($token, self::KEY_JWT, ["HS256"]);
@@ -38,6 +32,7 @@
             $_user = $user -> fetch_array();
             $user -> free_result();
             unset($_user["password"]);
+            Method::unset_cache($_user);
             self::setToken($_user);
             /* save authorlize for cookie http */
             return $_user;
@@ -46,7 +41,7 @@
          }
       }
       static public function Logout() {
-         setcookie("authorlize_token", "", -1, "/", null, null, true);
+         return setcookie("authorlize_token", "", -1, "/", null, null, true);
       }
       static private function checkEmail(string $email) {
          global $SQL;

@@ -6,6 +6,7 @@
    header("Access-Control-Allow-Methods: PUT, POST, GET, OPTIONS, DELETE");
  
    require_once __DIR__."/../modules/OAuth.php";
+   require_once __DIR__."/../modules/ErrorMS.php";
    
    new class {
       public function __construct() {
