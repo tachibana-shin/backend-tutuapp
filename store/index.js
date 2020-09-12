@@ -16,7 +16,7 @@ export default new Vuex.Store({
    },
    actions: {
       Login({ commit }, form) {
-         return this.$axios.post("http://localhost:8001/admin/api/Login.php", form)
+         return this.$axios.post("/admin/api/Login.php", form)
          .then(res => res.data)
          .then(json => {
             if ( !json.state.error ) {
@@ -29,7 +29,7 @@ export default new Vuex.Store({
          })
       },
       Logout({ commit }) {
-         return this.$axios.post("http://localhost:8001/admin/api/Logout.php")
+         return this.$axios.post("/admin/api/Logout.php")
          .then(res => res.data)
          .then(json => {
             if ( !json.state.error ) {
@@ -41,10 +41,9 @@ export default new Vuex.Store({
          })
       },
       fetchUser({ commit }) {
-         return this.$axios.get("http://localhost:8001/admin/api/Login.php")
+         return this.$axios.get("/admin/api/Login.php")
          .then(res => res.data)
          .then(json => {
-            console.log( json )
             if ( !json.state.error ) {
                commit("setCurrentUser", json.data)
             } else {

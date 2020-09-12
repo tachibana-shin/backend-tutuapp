@@ -179,7 +179,7 @@
                   formData.append("id", id)
                   formData.append("action", "delete")
                   return axios
-                     .post("http://localhost:8001/admin/api/App.php", formData)
+                     .post("/admin/api/App.php", formData)
                      .then(res => res.data)
                      .then(response => {
 
@@ -247,7 +247,7 @@
                container: null
             })
             
-            this.$axios.post("http://localhost:8001/admin/api/App.php", formData)
+            this.$axios.post("/admin/api/App.php", formData)
                .then(res => res.data)
                .then(json => {
                   console.log( json )
@@ -274,7 +274,7 @@
                container: null
             })
             
-            this.$axios.get("http://localhost:8001/admin/api/App.php", {
+            this.$axios.get("/admin/api/App.php", {
                   params: {
                      id: this.$route.params.id
                   },
@@ -319,7 +319,7 @@
          },
          searchLanguage(query, loading) {
             loading(true)
-            axios.get("http://localhost:8001/admin/api/Languages-search.php", {
+            axios.get("/admin/api/Languages-search.php", {
                params: {
                   query
                }

@@ -47,9 +47,10 @@
          this.$store.dispatch("fetchUser")
             .then(json => {
                if ( json.state.error || !json.data ) {
-                  this.$router.push("/login")
+                  throw new Error( json.state.message )
                }
             })
+            .catch(() => this.$router.push("/login"))
       }
    }
 </script>

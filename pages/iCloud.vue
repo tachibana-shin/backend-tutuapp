@@ -83,7 +83,7 @@
 
             let formData = new FormData(this.$refs.formData)
 
-            this.$axios.post("http://localhost:8001/admin/api/iCloud.php", formData)
+            this.$axios.post("/admin/api/iCloud.php", formData)
                .then(res => res.data)
                .then(json => {
                   console.log(json)
@@ -111,7 +111,7 @@
             height: 50,
             container: null
          })
-         this.$axios.get("http://localhost:8001/admin/api/iCloud.php")
+         this.$axios.get("/admin/api/iCloud.php")
             .then(res => res.data)
             .then(json => {
                if (json.state.error) {

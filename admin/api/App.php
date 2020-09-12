@@ -103,7 +103,7 @@
                Method::unset_cache($app);
                
                if( $_GET["produce"] ?? false ) {
-                  $result = $SQL -> query("select name, icon from Apps order by updated desc limit 8");
+                  $result = $SQL -> query("select name, icon from Apps order by updated desc limit 8 where not id = $id");
                   $apps = [];
                   
                   if ( $result -> num_rows > 0 ) {

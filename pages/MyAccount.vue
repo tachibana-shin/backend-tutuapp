@@ -122,7 +122,7 @@
       },
       methods: {
          confirmPassword() {
-            this.$axios.post("http://localhost:8001/admin/api/confirm-password.php", new FormData(this.$refs.FormDataConfirmPassword))
+            this.$axios.post("/admin/api/confirm-password.php", new FormData(this.$refs.FormDataConfirmPassword))
             .then(res => res.data)
             .then(json => {
                if ( json.state.error ) {

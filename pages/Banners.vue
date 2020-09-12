@@ -120,7 +120,7 @@
                height: 50,
                container: null
             })
-            this.$axios.get("http://localhost:8001/admin/api/Banners.php", {
+            this.$axios.get("/admin/api/Banners.php", {
                params: {
                   category: this.category
                }
@@ -161,7 +161,7 @@
                container: null
             })
             
-            this.$axios.post("http://localhost:8001/admin/api/Banners.php", formData)
+            this.$axios.post("/admin/api/Banners.php", formData)
             .then(res => res.data)
             .then(json => {
                if ( json.state.error ) {

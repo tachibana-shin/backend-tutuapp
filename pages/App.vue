@@ -288,7 +288,7 @@
             this.$refs.VueInfinite.stateChanger.reset()
          },
          infiniteHandler($state) {
-           this.$axios.get("http://localhost:8001/admin/api/All-app.php", {
+           this.$axios.get("/admin/api/All-app.php", {
                   params: {
                      "page": this.page++,
                      "category": this.$options.optsCategory[this.category].value,
@@ -331,7 +331,7 @@
                   formData.append("id", id)
                   formData.append("action", "delete")
                   return axios
-                     .post("http://localhost:8001/admin/api/App.php", formData)
+                     .post("/admin/api/App.php", formData)
                      .then(res => res.data)
                      .then(response => {
                         if (response.state.error )
