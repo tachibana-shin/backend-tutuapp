@@ -7,7 +7,6 @@
 
    require_once __DIR__."/../modules/SQL.php";
    require_once __DIR__."/../modules/OAuth.php";
-   require_once __DIR__."/../modules/File.php";
    require_once __DIR__."/../modules/Method.php";
    /* Map SQL: AppsVIP
       ------------------------------------
@@ -41,18 +40,6 @@
       }
       
       private function read() {
-         global $SQL;
-         
-         $result = $SQL -> query("select Apps.name, Apps.icon, Apps.id from Apps Apps, AppsVIP AppsVIP where Apps.id = AppsVIP.idFor");
-         
-         $appVip = [];
-         if ( $result -> num_rows > 0 ) {
-            while ( $row = $result -> fetch_array() ) {
-               Method::unset_cache($row);
-               $row["icon"] = File::get($row["icon"]);
-               array_push($appVip, $row);
-            }
-         }
          
          echo json_encode([
             "state" => [
@@ -60,7 +47,7 @@
                "code" => 200,
                "message" => ""
             ],
-            "data" => $appVip
+            "data" => Method::fetch_query("select Apps.name, Apps.icon, Apps.id from Apps Apps, AppsVIP AppsVIP where Apps.id = AppsVIP.idFor", "icon")
          ]);
       }
       private function write() {

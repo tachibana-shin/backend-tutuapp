@@ -6,7 +6,6 @@
    header("Access-Control-Allow-Methods: PUT, POST, GET, OPTIONS, DELETE");
 
    require_once __DIR__."/../modules/ErrorMS.php";
-   require_once __DIR__."/../modules/SQL.php";
    require_once __DIR__."/../modules/Method.php";
    
    new class {
@@ -14,19 +13,6 @@
          global $SQL;
          if ( $_SERVER["REQUEST_METHOD"] == "GET" ) {
             if ( ($_GET["query"] ?? null) != null ) {
-               $query = addslashes($_GET["query"]);
-               
-               $result = $SQL -> query("select name, id from Apps where name like '%$query%'");
-               
-               $apps = [];
-               
-               if ( $result -> num_rows > 0 ) {
-                  # I.notDie();
-                  while ( $row = $result -> fetch_array() ) {
-                     Method::unset_cache($row);
-                     array_push($apps, $row);
-                  }
-               }
                
                echo json_encode([
                   "state" => [
@@ -34,7 +20,7 @@
                      "code" => 200,
                      "message" => ""
                   ],
-                  "data" => $apps
+                  "data" => Method::fetch_query("select name, id from Apps where name like '%%1%'", $_GET["query"])
                ]);
             } else {
                echo json_encode(ErrorMS::PARAMS);

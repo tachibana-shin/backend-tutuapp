@@ -60,14 +60,8 @@
          
          if ( $result = $SQL -> query($query) ) {
             
-            $data = [];
-            if ( $result -> num_rows > 0 ) {
-               while ( $row = $result -> fetch_array() ) {
-                  Method::unset_cache($row);
-                  $row["icon"] = File::get($row["icon"]);
-                  array_push($data, $row);
-               }
-            }
+            $data = Method::fetch_array($result);
+            
             echo json_encode([
                "state" => [
                   "error" => false,
