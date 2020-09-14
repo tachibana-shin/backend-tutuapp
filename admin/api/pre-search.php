@@ -20,7 +20,7 @@
                      "code" => 200,
                      "message" => ""
                   ],
-                  "data" => Method::fetch_query("select name, id from Apps where name like '%%1%'", $_GET["query"])
+                  "data" => Method::fetch_query("select name, id from Apps where name like '%%1%'", [], $_GET["query"])
                ]);
             } else {
                echo json_encode(ErrorMS::PARAMS);

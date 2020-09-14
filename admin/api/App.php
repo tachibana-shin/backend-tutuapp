@@ -103,16 +103,6 @@
                Method::unset_cache($app);
                
                if( $_GET["produce"] ?? false ) {
-                  $result = $SQL -> query("select name, icon from Apps order by updated desc limit 8 where not id = $id");
-                  $apps = [];
-                  
-                  if ( $result -> num_rows > 0 ) {
-                     while ( $row = $result -> fetch_array() ) {
-                        array_push($apps, $row);
-                     }
-                     $result -> free_result();
-                  }
-                  
                   echo json_encode([
                      "state" => [
                         "error" => false,
@@ -121,9 +111,10 @@
                      ],
                      "data" => [
                         "data" => $app,
-                        "apps" => $apps
+                        "apps" => Method::fetch_query("select name, icon from Apps where not id = $id and category = '%1' order by updated desc limit 8", ["icon"], $app["category"])
                      ]
                   ]);
+                  echo $SQL-> error;
                } else {
                   echo json_encode([
                      "state" => [

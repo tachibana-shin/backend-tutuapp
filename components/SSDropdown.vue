@@ -52,7 +52,7 @@
       },
       methods: {
          hide(e) {
-            if ( this.$refs.toggle && [e.target, e.srcElement, e.targetElement].indexOf(this.$refs.toggle) == -1 )
+            if ( this.$refs.toggle && [e.srcElement, e.targetElement].indexOf(this.$refs.toggle) == -1 )
                this.showState = false
          }
       },
