@@ -11,7 +11,6 @@
    require_once __DIR__."/../modules/OAuth.php";
    require_once __DIR__."/../modules/Method.php"; 
    require_once __DIR__."/../modules/ErrorMS.php";
-   require_once __DIR__."/../modules/Base.php";
    /* Map SQL: Apps
       ------------------------------------
       | id | name | icon | size | description | screenshot <sezialise> | developer | category | updated | compatibility | languages | version | account | download |
