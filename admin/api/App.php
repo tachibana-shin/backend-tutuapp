@@ -11,6 +11,7 @@
    require_once __DIR__."/../modules/OAuth.php";
    require_once __DIR__."/../modules/Method.php"; 
    require_once __DIR__."/../modules/ErrorMS.php";
+   require_once __DIR__."/../modules/Base.php";
    /* Map SQL: Apps
       ------------------------------------
       | id | name | icon | size | description | screenshot <sezialise> | developer | category | updated | compatibility | languages | version | account | download |
@@ -89,7 +90,8 @@
                $app["version"] = unserialize($app["version"]);
                $app["languages"] = unserialize($app["languages"]);
                
-               $app["icon"] = File::get($app["icon"]);
+	       $app["icon"] = File::get($app["icon"]);
+	       $app["version"] = Base::encode(json_encode($app["version"]));
                
                $app["screenshot"] = array_map(
                      function ($file) {
@@ -99,7 +101,7 @@
                         $app["screenshot"]
                      ) ?: []
                   );
-                  
+        
                Method::unset_cache($app);
                
                if( $_GET["produce"] ?? false ) {

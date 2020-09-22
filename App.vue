@@ -13,6 +13,16 @@
 </style>
 <script>
    import HeaderApp from "./components/HeaderApp.vue"
+   import 'vue-loading-overlay/dist/vue-loading.css';
+   import 'bootstrap/scss/bootstrap.scss'
+   import '@/awesome/scss/fontawesome.scss'
+   import '@/awesome/scss/brands.scss'
+   import '@/awesome/scss/duotone.scss'
+   import '@/awesome/scss/light.scss'
+   import '@/awesome/scss/regular.scss'
+   import '@/awesome/scss/solid.scss'
+   import '@/awesome/scss/v4-shims.scss'
+   
    export default {
       components: { HeaderApp },
       mounted() {
@@ -41,7 +51,7 @@
             this.$Progress.finish()
             
             let fn = to.meta._title || to.meta.title
-            document.title = typeof fn == "function" ? fn(this.$route) : fn
+            document.head.getElementsByTagName("title")[0].textContent = document.title = typeof fn == "function" ? fn(this.$route) : fn
          })
 
          this.$store.dispatch("fetchUser")
