@@ -91,7 +91,6 @@
                $app["languages"] = unserialize($app["languages"]);
                
 	       $app["icon"] = File::get($app["icon"]);
-	       $app["version"] = Base::encode(json_encode($app["version"]));
                
                $app["screenshot"] = array_map(
                      function ($file) {
