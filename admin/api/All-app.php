@@ -60,7 +60,7 @@
          
          if ( $result = $SQL -> query($query) ) {
             
-            $data = Method::fetch_array($result);
+            $data = Method::fetch_array($result, ["icon"]);
             
             echo json_encode([
                "state" => [
