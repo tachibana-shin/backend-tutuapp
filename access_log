@@ -1,0 +1,13 @@
+::1 - - [23/Sep/2020:05:25:43 +0700] "GET /admin/api/Test.php HTTP/1.1" 200 638
+::1 - - [23/Sep/2020:05:25:44 +0700] "GET /favicon.ico HTTP/1.1" 500 524
+::1 - - [23/Sep/2020:05:26:30 +0700] "GET /admin/api/Test.php HTTP/1.1" 200 961
+::1 - - [23/Sep/2020:05:26:30 +0700] "GET /favicon.ico HTTP/1.1" 500 524
+::1 - - [23/Sep/2020:05:26:54 +0700] "GET /admin/api/Test.php HTTP/1.1" 200 320
+::1 - - [23/Sep/2020:05:26:54 +0700] "GET /favicon.ico HTTP/1.1" 500 524
+::1 - - [23/Sep/2020:05:27:22 +0700] "GET /admin/api/Test.php HTTP/1.1" 200 673
+::1 - - [23/Sep/2020:05:27:23 +0700] "GET /favicon.ico HTTP/1.1" 500 524
+::1 - - [23/Sep/2020:05:28:11 +0700] "GET /admin/api/Test.php HTTP/1.1" 200 9864
+::1 - - [23/Sep/2020:05:28:11 +0700] "GET /favicon.ico HTTP/1.1" 500 524
+::1 - - [23/Sep/2020:05:29:13 +0700] "-" 408 -
+::1 - - [23/Sep/2020:05:29:16 +0700] "GET /admin/api/Test.php HTTP/1.1" 200 10749
+::1 - - [23/Sep/2020:05:29:16 +0700] "GET /favicon.ico HTTP/1.1" 500 524
