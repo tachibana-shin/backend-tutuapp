@@ -30,8 +30,8 @@
       languages text not null,
       version text not null,
       account tinytext not null,
-      download int not null,
-      primary key(id)
+      download int not null default = 0,
+ key(id)
    )");
    echo $SQL -> error;
    */
