@@ -62,7 +62,7 @@
             unset($array[$i]);
          }
       }
-      static public function fetch_array(&$result, $unPath = []) {
+      static public function fetch_array($result, $unPath = []) {
          $resultData = [];
          if ( $result -> num_rows > 0 ) {
             while ( $row = $result -> fetch_array() ) {
@@ -80,9 +80,10 @@
          
          if ( gettype($unPath) != "array" ) {
             array_push($args, $unPath);
+            $unPath = [];
          }
          
-         for ( $index = count($args); $index > -1; $index-- ) {
+         for ( $index = count($args) - 1; $index > -1; $index-- ) {
             $value = $args[$index];
             $query = str_replace("%".($index + 1), addslashes($value), $query);
          }
