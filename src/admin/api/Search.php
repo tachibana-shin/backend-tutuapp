@@ -19,13 +19,23 @@
       }
       private function search() {
          if ( ($_GET["query"] ?? null) != null ) {
+            $apps = Method::fetch_query("select id, name, developer, languages, category, description, compatibility, icon from Apps where name like '%%1%' or developer like '%%1%' or category like '%%1%' or compatibility like '%%1%' or description like '%%1%' limit 20 offset %2", ["icon"], $_GET["query"], (int) ( $_GET["offset"] ?? 0 ));
+            
+            Method::insert_keyword($apps, $_GET["query"]);
+            
             echo json_encode([
                "state" => [
                   "error" => false,
                   "code" => 200,
                   "message" => ""
                ],
-               "data" => Method::fetch_query("select icon, id, name from Apps where name like '%%1%' or developer like '%%1%' or category like '%%1%' or compatibility like '%%1%' or description like '%%1%' limit 20 offset %2", ["icon"], $_GET["query"], (int) ( $_GET["offset"] ?? 0 ))
+               "data" => array_map(function ($item) {
+                  return [
+                     "id" => $item["id"],
+                     "icon" => $item["icon"],
+                     "name" => $item["name"]
+                  ];
+               }, $apps)
             ]);
          } else {
             echo json_encode(ErrorMS::PARAMS);

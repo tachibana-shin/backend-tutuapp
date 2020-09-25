@@ -2,7 +2,7 @@
    require_once __DIR__."/SQL.php";
    require_once __DIR__."/File.php";
    
-   function sameString( string $string, string $keyword ): number {
+   function sameString( string $string, string $keyword ) {
       for ( $length = count($keyword) - 1; $length > 0; $length-- ) {
          if ( strpos(
             str_replace("/\s/g", "", $string),
@@ -13,25 +13,26 @@
             return $length;
          }
       }
-      return 0;
+      return 1;
    }
    
-   function getPointKeyword( array $app, string $keyword, array $dataField = [] ): number {
+
+   function getPointKeyword( array $app, string $keyword, array $dataField = [] ) {
       
       $spoint = 0;
       
       foreach ( $dataField as $__proto__ => $value ) {
-         $spoint = max( $spoint, sameString($value, $__proto__) * $value );
+         $spoint = max( $spoint, sameString((string) $app[$__proto__], (string) $keyword) * $value );
       }
       
       return $spoint;
    }
     
-   function getAppMaxPoint( array $apps, string $keyword ): array {
+   function getAppMaxPoint( array $apps, string $keyword ) {
       $points = array_map(function ( $item ) use ( $keyword ) {
          return [
             "id" => $item["id"],
-            "value" => getPointKeyword($item, $keyword, [
+            "point" => getPointKeyword($item, $keyword, [
                "name" => 70,
                "developer" => 50,
                "description" => 40,
@@ -44,7 +45,7 @@
       
       $max = [
          "id" => null,
-         "value" => -Infinite
+         "point" => null
       ];
       
       foreach ( $points as $index => $value ) {
@@ -91,8 +92,10 @@
          
          return static::fetch_array($SQL -> query($query), $unPath);
       }
-      static public function getAppMaxPoint( array $apps, string $keyword ): array {
-         return getAppMaxPoint($apps, $keyword);
+      static public function insert_keyword( array $apps, string $keyword ): void {
+         $max = getAppMaxPoint($apps, $_GET["query"]);
+         global $SQL;
+         $SQL -> query("insert into Keywords ( keyword, idApp, point ) values ( '".addslashes($_GET["query"])."', $max[id], $max[point] )");
       }
    }
 ?>
