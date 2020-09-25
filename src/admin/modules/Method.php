@@ -7,7 +7,7 @@
             unset($array[$i]);
          }
       }
-      static public function fetch_array(&$result, $unPath = []) {
+      static public function fetch_array(&result, $unPath = []) {
          $resultData = [];
          if ( $result -> num_rows > 0 ) {
             while ( $row = $result -> fetch_array() ) {
