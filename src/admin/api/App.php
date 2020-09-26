@@ -30,6 +30,7 @@
       languages text not null,
       version text not null,
       account tinytext not null,
+      view int not null default = 0,
       download int not null default = 0,
  key(id)
    )");
@@ -89,7 +90,7 @@
                $app["version"] = unserialize($app["version"]);
                $app["languages"] = unserialize($app["languages"]);
                
-	       $app["icon"] = File::get($app["icon"]);
+	            $app["icon"] = File::get($app["icon"]);
                
                $app["screenshot"] = array_map(
                      function ($file) {
@@ -103,6 +104,15 @@
                Method::unset_cache($app);
                
                if( $_GET["produce"] ?? false ) {
+                  
+                  $appsViewed = @json_encode($_COOKIE["viewd"] ?? "[]") ?: [];
+                  
+                  if ( $appsViewed[$app["id"]] ?? false ) {
+                     $SQL -> query("update from Apps set view = view + 1 where id = $app[id]");
+                     array_push($appsViewed, $app["id"]);
+                     setcookie("viewd", json_encode($appsViewed), "/");
+                  }
+                  
                   echo json_encode([
                      "state" => [
                         "error" => false,

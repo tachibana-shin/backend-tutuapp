@@ -23,9 +23,18 @@
       }
       
       private function read() {
+         $apps = Method::fetch_query("select id, name, icon from Apps order by view desc limit 8", ["icon"]);
          
-         $keywords = Method::fetch_query("select value from keywords order count desc limit 5");
-         $appHotPro = Method::fetch_array("select icon app.name, app.icon from app Apps, ");
+         echo json_encode([
+            "state" => [
+               "error" => false,
+               "code" => 200,
+               "message" => ""
+            ],
+            "data" => [
+               "intersting" => $apps
+            ]
+         ]);
       }
    }
 ?>
