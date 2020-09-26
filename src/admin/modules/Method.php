@@ -92,9 +92,11 @@
          
          return static::fetch_array($SQL -> query($query), $unPath);
       }
+      
       static public function insert_keyword( array $apps, string $keyword ): void {
          $max = getAppMaxPoint($apps, $_GET["query"]);
          global $SQL;
+         
          $SQL -> query("insert into Keywords ( keyword, idApp, point ) values ( '".addslashes($_GET["query"])."', $max[id], $max[point] )");
       }
    }
