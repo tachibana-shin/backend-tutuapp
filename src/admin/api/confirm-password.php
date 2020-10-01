@@ -1,4 +1,6 @@
 <?php
+   header("Content-Type: application/json; charset=utf-8");
+    
    require_once __DIR__."/../modules/SQL.php";
    require_once __DIR__."/../modules/OAuth.php";
    
