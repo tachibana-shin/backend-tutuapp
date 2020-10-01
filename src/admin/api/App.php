@@ -105,12 +105,12 @@
                
                if( $_GET["produce"] ?? false ) {
                   
-                  $appsViewed = @json_encode($_COOKIE["viewd"] ?? "[]") ?: [];
+                  $appsViewed = @json_decode($_COOKIE["viewd"] ?? "[]") ?: [];
                   
-                  if ( $appsViewed[$app["id"]] ?? false ) {
-                     $SQL -> query("update from Apps set view = view + 1 where id = $app[id]");
-                     array_push($appsViewed, $app["id"]);
-                     setcookie("viewd", json_encode($appsViewed), "/");
+                  if ( !(in_array($app["id"], $appsViewed) ?? false) ) {
+                     $SQL -> query("update Apps set view = view + 1 where id = $app[id]");
+                          array_push($appsViewed, $app["id"]);
+                     setcookie("viewd", json_encode($appsViewed), strtotime("+1days"), "/");
                   }
                   
                   echo json_encode([
