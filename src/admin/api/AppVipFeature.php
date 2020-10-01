@@ -12,12 +12,12 @@
       ------------------------------------
       | id | idFor |
       ------------------------------------
-   */
+   
    $SQL -> query("create table if not exists AppsVIP (
          id int not null auto_increment,
          idFor int not null,
          primary key(id)
-   ");
+   ");*/
    new class {
       public function __construct() {
          $method = strtoupper($_POST["action"] ?? $_SERVER["REQUEST_METHOD"]);
@@ -47,7 +47,7 @@
                "code" => 200,
                "message" => ""
             ],
-            "data" => Method::fetch_query("select Apps.name, Apps.icon, Apps.id from Apps Apps, AppsVIP AppsVIP where Apps.id = AppsVIP.idFor", "icon")
+            "data" => Method::fetch_query("select name, id, icon from Apps order by view desc limit 20", ["icon"])
          ]);
       }
       private function write() {

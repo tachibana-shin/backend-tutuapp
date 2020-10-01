@@ -32,7 +32,10 @@
                "message" => ""
             ],
             "data" => [
-               "intersting" => $apps
+               "intersting" => $apps,
+               "keyword" => array_unique(array_slice(array_map(function ($item) {
+                   return $item["name"];
+               }, $apps), 0, 5))
             ]
          ]);
       }

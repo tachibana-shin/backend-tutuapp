@@ -17,7 +17,6 @@
                if ( !isset($_COOKIE["app".$_GET["id"]]) ) {
                   $SQL -> query("update Apps set download = download + 1 where id = ".((int) $_GET["id"]));
                   setcookie("app".$_GET["id"], true, strtotime("+12hours"), "/", NULL, NULL, true);
-                  echo $SQL -> error;
                   if ( $SQL -> error ) {
                      echo json_encode(ErrorMS::UNKNOWN);
                   } else {
