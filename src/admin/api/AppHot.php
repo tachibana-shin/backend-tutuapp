@@ -43,10 +43,11 @@
                      "code" => 200,
                      "message" => ""
                   ],
-                  "data" => Method::fetch_query("select name, id, icon from Apps where ${$not ? 'not' : ''} category = '%1' order by download desc limit 20 offset %2", ["icon"], $type, $offset)
+                  "data" => Method::fetch_query("select name, id, icon, category from Apps where ".($not ? 'not' : '')." category = '%1' order by download desc limit 20 offset %2", ["icon"], $type, $offset)
                ]);
                
             }
+            
          }
       }
    }
